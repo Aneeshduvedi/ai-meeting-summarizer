@@ -46,7 +46,7 @@ ai_meeting_summarizer/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/broski62026-prog/ai-meeting-summarizer.git
+git clone https://github.com/Aneeshduvedi/mock-interview-ai-agent.git
 cd ai-meeting-summarizer
 ```
 
@@ -125,7 +125,7 @@ Potential enhancements include improved report formatting, additional meeting an
 
 **Aneesh Duvedi**
 
-GitHub: [broski62026-prog](https://github.com/broski62026-prog)
+GitHub: [Aneesh Duvedi](https://github.com/Aneeshduvedi)
 
 ## License
 
