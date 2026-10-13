@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+    <h2>Create Your Account</h2>
+    <p>Register to start summarizing your meetings.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">
+            Register
+        </button>
+    </form>
+
+    <p class="mt-3">
+        Already have an account?
+        <a href="#">Login</a>
+    </p>
+</div>
+{% endblock %}

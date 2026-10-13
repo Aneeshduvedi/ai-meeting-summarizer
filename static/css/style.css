@@ -1,0 +1,421 @@
+
+/* ========================================
+   1. General Page Styling
+======================================== */
+
+:root {
+    --primary: #6D28D9;
+    --primary-dark: #5B21B6;
+    --primary-light: #EDE9FE;
+    --page-bg: #F7F5FF;
+    --text-main: #312E81;
+    --text-muted: #64748B;
+    --border-color: #E5E0F5;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    color: #334155;
+    font-family: Arial, sans-serif;
+}
+
+/* ========================================
+   2. Navigation and Links
+======================================== */
+
+.navbar {
+    background-color: #FFFFFF;
+}
+
+.navbar-brand {
+    color: var(--primary);
+    letter-spacing: 0.2px;
+}
+
+.navbar-brand:hover {
+    color: var(--primary-dark);
+}
+
+a {
+    text-decoration: none;
+}
+
+/* ========================================
+   3. Application Layout
+======================================== */
+
+.app-layout {
+    min-height: 100vh;
+}
+
+/* ========================================
+   4. Sidebar
+======================================== */
+
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    padding: 24px 16px;
+    overflow-y: auto;
+    background: #FFFFFF;
+    border-right: 1px solid var(--border-color);
+    transition: transform 0.25s ease;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 38px;
+    color: var(--text-main);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.sidebar-brand:hover {
+    color: var(--primary);
+}
+
+.brand-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+.sidebar-label {
+    margin: 0 10px 12px;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.sidebar-nav {
+    display: grid;
+    gap: 8px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #475569;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-link span {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.sidebar-link:hover,
+.sidebar-link:focus-visible {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.sidebar-link:focus-visible,
+.sidebar-brand:focus-visible {
+    outline: 3px solid #A78BFA;
+    outline-offset: 3px;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 24px;
+}
+
+/* Logout form and button */
+
+.sidebar-bottom form {
+    width: 100%;
+    margin: 0;
+}
+
+.sidebar-logout {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #475569;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.sidebar-logout:hover,
+.sidebar-logout:focus-visible {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+/* ========================================
+   5. Main Content
+======================================== */
+
+.main-area {
+    min-height: 100vh;
+    margin-left: 250px;
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 72px;
+    padding: 12px 28px;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.topbar-title {
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-avatar {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+}
+
+.page-content {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 28px;
+}
+
+/* Mobile menu button */
+
+.menu-toggle {
+    display: none;
+    padding: 7px 11px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: #FFFFFF;
+    color: var(--primary-dark);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.menu-toggle:hover {
+    background: var(--primary-light);
+}
+
+.menu-toggle:focus-visible {
+    outline: 3px solid #A78BFA;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   6. Cards and Panels
+======================================== */
+
+.card {
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(49, 46, 129, 0.035);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(91, 33, 182, 0.09);
+}
+
+.card-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-body {
+    overflow-wrap: anywhere;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    color: var(--text-main);
+}
+
+.bg-light {
+    background-color: #FAF9FF !important;
+}
+
+/* ========================================
+   7. Buttons
+======================================== */
+
+.btn {
+    border-radius: 8px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn:focus-visible {
+    outline: 3px solid #A78BFA;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   8. Form Controls
+======================================== */
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border-color: #DDD6FE;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.15);
+}
+
+/* ========================================
+   9. Toast Notifications
+======================================== */
+
+.toast-container {
+    z-index: 2000;
+}
+
+/* ========================================
+   10. Responsive Layout
+======================================== */
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0);
+        box-shadow: 8px 0 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .main-area {
+        margin-left: 0;
+    }
+
+    .topbar {
+        min-height: 64px;
+        padding: 12px 16px;
+    }
+
+    .menu-toggle {
+        display: inline-block;
+    }
+
+    .page-content {
+        padding: 18px 14px;
+    }
+
+    .topbar-user > span:last-child {
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-body {
+        padding: 1rem !important;
+    }
+
+    .topbar {
+        gap: 10px;
+    }
+}
+
+/* ========================================
+   11. Reduced Motion Accessibility
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

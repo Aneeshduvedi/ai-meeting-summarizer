@@ -1,0 +1,75 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+            {% if editing %}
+                <h2>Edit Meeting</h2>
+                <p class="text-muted">
+                    Update the meeting title or transcript.
+                </p>
+            {% else %}
+                <h2>New Meeting</h2>
+                <p class="text-muted">
+                    Enter your meeting title and paste the transcript.
+                </p>
+            {% endif %}
+
+            <hr>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}"
+                               class="form-label">
+                            {{ field.label }}
+                        </label>
+
+                        {{ field }}
+
+                        {% if field.help_text %}
+                            <div class="form-text">
+                                {{ field.help_text }}
+                            </div>
+                        {% endif %}
+
+                        {% for error in field.errors %}
+                            <div class="text-danger small">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                {% if editing %}
+                    <button type="submit" class="btn btn-primary">
+                        Save Changes
+                    </button>
+                {% else %}
+                    <button type="submit" class="btn btn-primary">
+                        Save Transcript
+                    </button>
+                {% endif %}
+
+                <a href="{% url 'dashboard' %}"
+                   class="btn btn-outline-secondary ms-2">
+                    Cancel
+                </a>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

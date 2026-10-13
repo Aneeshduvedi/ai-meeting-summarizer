@@ -1,0 +1,26 @@
+# Web framework
+Django>=5.2,<5.3
+
+# AI model integration
+groq>=0.30.0
+
+# PostgreSQL database driver
+psycopg[binary]>=3.2
+
+# Structured output validation
+pydantic>=2.10
+
+# Environment variables
+python-dotenv>=1.0
+
+# Production WSGI server (for deployment later)
+gunicorn>=23.0; sys_platform != "win32"
+
+# Static file handling (for deployment later)
+whitenoise>=6.9
+
+# Testing and coverage
+coverage>=7.6
+
+# HTTP client for integration testing
+httpx>=0.28

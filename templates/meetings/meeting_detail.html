@@ -1,0 +1,105 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Top Buttons -->
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <a href="{% url 'dashboard' %}"
+           class="btn btn-outline-secondary">
+            Back to Dashboard
+        </a>
+
+        <a href="{% url 'download_meeting_report' meeting.id %}"
+           class="btn btn-danger">
+            Download PDF
+        </a>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+            <!-- Meeting Header -->
+            <h2>{{ meeting.title }}</h2>
+            <p class="text-muted mb-3">Meeting Report</p>
+            <hr>
+
+            <!-- Original Meeting Transcript -->
+            <h4>Original Meeting Transcript</h4>
+
+            <div class="border rounded p-3 bg-light mb-4"
+                 style="white-space: pre-wrap; overflow-wrap: anywhere; max-height: 450px; overflow-y: auto;">{{ meeting.transcript }}</div>
+
+            <hr>
+
+            <!-- Meeting Summary -->
+            <h4>Summary</h4>
+            <p>{{ report.summary|linebreaksbr }}</p>
+
+            <!-- Topics Discussed -->
+            <h4 class="mt-4">Topics Discussed</h4>
+            <ul>
+                {% for topic in report.topics %}
+                    <li>{{ topic }}</li>
+                {% empty %}
+                    <li>No topics identified.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Decisions -->
+            <h4 class="mt-4">Decisions</h4>
+            <ul>
+                {% for decision in report.decisions %}
+                    <li>{{ decision }}</li>
+                {% empty %}
+                    <li>No decisions identified.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Action Items -->
+            <h4 class="mt-4">Action Items</h4>
+
+            {% for item in report.action_items %}
+                <div class="border rounded p-3 mb-2">
+                    <p>
+                        <strong>Task:</strong> {{ item.task }}
+                    </p>
+                    <p>
+                        <strong>Owner:</strong> {{ item.owner }}
+                    </p>
+                    <p class="mb-0">
+                        <strong>Deadline:</strong> {{ item.deadline }}
+                    </p>
+                </div>
+            {% empty %}
+                <p>No action items identified.</p>
+            {% endfor %}
+
+            <!-- Unresolved Questions -->
+            <h4 class="mt-4">Unresolved Questions</h4>
+            <ul>
+                {% for question in report.unresolved_questions %}
+                    <li>{{ question }}</li>
+                {% empty %}
+                    <li>No unresolved questions identified.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Footer -->
+            <hr>
+
+            <a href="{% url 'dashboard' %}"
+               class="btn btn-outline-primary mt-2">
+                Back to Meeting History
+            </a>
+
+            <a href="{% url 'download_meeting_report' meeting.id %}"
+               class="btn btn-danger mt-2">
+                Download PDF
+            </a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
