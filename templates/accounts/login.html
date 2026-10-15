@@ -1,23 +1,242 @@
 
 {% extends "base.html" %}
+{% load static %}
 
-{% block content %}
-<div class="container mt-5" style="max-width: 500px;">
-    <h2>Welcome Back</h2>
-    <p>Log in to access your meeting summaries.</p>
+{% block title %}Login | AI Meeting Summarizer{% endblock %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+{% block body_class %}auth-body{% endblock %}
 
-        <button type="submit" class="btn btn-primary">
-            Login
-        </button>
-    </form>
+{% block app_layout %}{% endblock app_layout %}
 
-    <p class="mt-3">
-        Don't have an account?
-        <a href="{% url 'register' %}">Register</a>
-    </p>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+{% block standalone_content %}
+
+<div class="auth-page">
+    <div class="auth-layout">
+
+        <!-- Left showcase section -->
+        <section class="auth-showcase">
+
+            <a href="{% url 'login' %}" class="auth-brand">
+                <span class="brand-icon">AI</span>
+                <span>Meeting Summarizer</span>
+            </a>
+
+            <div class="auth-showcase-content">
+
+                <span class="auth-eyebrow">
+                    YOUR MEETINGS, MADE SMARTER
+                </span>
+
+                <h1>
+                    Make every meeting
+                    <span>more meaningful.</span>
+                </h1>
+
+                <p>
+                    Turn meeting transcripts into clear summaries,
+                    important decisions, key discussion points,
+                    and actionable next steps.
+                </p>
+
+                <div class="auth-benefits">
+
+                    <div class="auth-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <h3>Clear summaries</h3>
+                            <p>Understand the important points quickly.</p>
+                        </div>
+                    </div>
+
+                    <div class="auth-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <h3>Important decisions</h3>
+                            <p>Keep track of what was discussed and decided.</p>
+                        </div>
+                    </div>
+
+                    <div class="auth-benefit">
+                        <span class="benefit-icon">✓</span>
+                        <div>
+                            <h3>Actionable tasks</h3>
+                            <p>Identify action items and next steps.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="auth-showcase-footer">
+                AI-powered meeting insights for your workflow.
+            </div>
+
+        </section>
+
+        <!-- Right login section -->
+        <section class="auth-panel">
+
+            <div class="auth-form-container">
+
+                <div class="auth-mobile-brand">
+                    <span class="brand-icon">AI</span>
+                    <span>Meeting Summarizer</span>
+                </div>
+
+                <div class="auth-heading">
+                    <span class="auth-eyebrow">WELCOME BACK</span>
+
+                    <h2>Welcome back!</h2>
+
+                    <p>
+                        Sign in to continue to your meeting workspace.
+                    </p>
+                </div>
+
+                <!-- Django messages -->
+                {% if messages %}
+                    <div class="auth-messages">
+                        {% for message in messages %}
+                            <div
+                                class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show"
+                                role="alert"
+                            >
+                                {{ message }}
+
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Login form -->
+                <form method="post" action="{% url 'login' %}" data-auth-form>
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                <p class="mb-0">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- Username -->
+                    <div class="auth-field">
+                        <label for="{{ form.username.id_for_label }}">
+                            Username
+                        </label>
+
+                        <input
+                            type="text"
+                            name="{{ form.username.html_name }}"
+                            id="{{ form.username.id_for_label }}"
+                            class="form-control auth-input"
+                            placeholder="Enter your username"
+                            autocomplete="username"
+                            value="{{ form.username.value|default_if_none:'' }}"
+                            required
+                            autofocus
+                        >
+
+                        {% if form.username.errors %}
+                            <div class="auth-field-error">
+                                {% for error in form.username.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="auth-field">
+                        <div class="auth-label-row">
+                            <label for="{{ form.password.id_for_label }}">
+                                Password
+                            </label>
+                        </div>
+
+                        <div class="auth-password-wrapper">
+                            <input
+                                type="password"
+                                name="{{ form.password.html_name }}"
+                                id="{{ form.password.id_for_label }}"
+                                class="form-control auth-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-password-toggle
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                Show
+                            </button>
+                        </div>
+
+                        {% if form.password.errors %}
+                            <div class="auth-field-error">
+                                {% for error in form.password.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Remember browser validation and submit -->
+                    <button
+                        type="submit"
+                        class="auth-submit"
+                        data-submit-button
+                    >
+                        <span>Sign in</span>
+                        <span aria-hidden="true">→</span>
+                    </button>
+
+                </form>
+
+                <div class="auth-divider">
+                    <span>NEW TO MEETING SUMMARIZER?</span>
+                </div>
+
+                <p class="auth-register">
+                    Don't have an account?
+                    <a href="{% url 'register' %}">
+                        Create an account
+                    </a>
+                </p>
+
+                <p class="auth-privacy-note">
+                    Your workspace is available after you sign in.
+                </p>
+
+            </div>
+
+            <footer class="auth-panel-footer">
+                AI Meeting Summarizer
+            </footer>
+
+        </section>
+
+    </div>
 </div>
+
+{% endblock standalone_content %}
+
+{% block extra_js %}
+<script src="{% static 'js/auth.js' %}" defer></script>
 {% endblock %}
